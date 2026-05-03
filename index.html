@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PULSE HARDWARE — Optimización Gaming Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #161616;
+  --surface: #1a1a1a;
+  --surface2: #222222;
+  --border: #2a2a2a;
+  --border2: #333333;
+  --red: #0af;
+  --red-dim: #0077cc;
+  --red-glow: rgba(0,170,255,0.25);
+  --white: #f5f5f5;
+  --gray: #888888;
+  --gray2: #555555;
+  --gray3: #3a3a3a;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--white); font-family:var(--font-body); overflow-x:hidden; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--red); }
+
+/* ══════════════════════════
+   NAV
+══════════════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:9999;
+  height:60px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 40px;
+  background:rgba(10,10,10,0.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  transition:background .3s;
+}
+.nav-logo {
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-display); font-size:1.3rem; font-weight:800;
+  letter-spacing:3px; color:var(--white); text-decoration:none;
+  text-transform:uppercase;
+}
+.nav-logo-icon {
+  width:32px; height:32px;
+  background:var(--red);
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem; font-weight:900; color:#fff;
+  font-family:var(--font-display);
+  flex-shrink:0;
+}
+.nav-links {
+  display:flex; align-items:center; gap:32px; list-style:none;
+}
+.nav-links a {
+  font-family:var(--font-body); font-size:0.85rem; font-weight:500;
+  color:var(--gray); text-decoration:none; letter-spacing:0.5px;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--white); }
+.nav-links .nav-cta {
+  background:var(--red); color:#fff; padding:8px 20px;
+  font-weight:600; font-size:0.82rem; letter-spacing:1px;
+  text-transform:uppercase; transition:background .2s, box-shadow .2s;
+}
+.nav-links .nav-cta:hover { background:#00ccff; box-shadow:0 0 20px var(--red-glow); }
+.nav-status-dot {
+  width:7px; height:7px; border-radius:50%; background:#22c55e;
+  box-shadow:0 0 8px #22c55e; animation:blink-dot 2s ease infinite; flex-shrink:0;
+}
+@keyframes blink-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.nav-right { display:flex; align-items:center; gap:12px; }
+.nav-engineers {
+  font-family:var(--font-mono); font-size:0.65rem; color:#22c55e; letter-spacing:1px;
+}
+
+/* ══════════════════════════
+   HERO
+══════════════════════════ */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  text-align:center;
+  position:relative; overflow:hidden;
+  padding:100px 40px 60px;
+}
+
+.hero-bg-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-bg-glow {
+  position:absolute; top:-10%; left:50%; transform:translateX(-50%);
+  width:800px; height:500px;
+  background:radial-gradient(ellipse, rgba(0,140,255,0.09) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-ticker {
+  position:absolute; top:60px; left:0; right:0;
+  overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  background:var(--bg2); padding:10px 0;
+  font-family:var(--font-display); font-size:0.78rem; font-weight:700;
+  letter-spacing:4px; color:var(--gray2); text-transform:uppercase;
+}
+.hero-ticker-track {
+  display:flex; gap:80px; white-space:nowrap;
+  animation:ticker-scroll 25s linear infinite;
+}
+.hero-ticker-track span { color:var(--red); }
+@keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+.hero-eyebrow {
+  font-family:var(--font-mono); font-size:0.7rem; font-weight:400;
+  color:var(--red); letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:24px;
+  display:flex; align-items:center; gap:12px; justify-content:center;
+  opacity:0; animation:fadeup .8s ease .3s forwards;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content:''; width:40px; height:1px; background:var(--red);
+}
+
+.hero-h1 {
+  font-family:var(--font-display);
+  font-size:clamp(4.5rem, 14vw, 11rem);
+  font-weight:900;
+  line-height:0.9;
+  letter-spacing:-2px;
+  color:var(--white);
+  text-transform:uppercase;
+  margin-bottom:8px;
+  opacity:0; animation:fadeup .8s ease .45s forwards;
+}
+.hero-h1 .accent { color:var(--red); }
+.hero-h1 .outline {
+  color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,0.15);
+}
+
+.hero-sub {
+  font-size:1.05rem; font-weight:300; color:var(--gray);
+  line-height:1.8; max-width:600px; margin:28px auto 48px;
+  opacity:0; animation:fadeup .8s ease .6s forwards;
+}
+.hero-sub strong { color:var(--white); font-weight:600; }
+
+.hero-btns {
+  display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+  opacity:0; animation:fadeup .8s ease .75s forwards;
+}
+.btn-primary {
+  background:var(--red); color:#fff;
+  padding:14px 36px; font-family:var(--font-body); font-size:0.88rem;
+  font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  transition:background .2s, box-shadow .2s, transform .15s;
+}
+.btn-primary:hover { background:#00ccff; box-shadow:0 8px 30px rgba(0,170,255,0.4); transform:translateY(-2px); }
+.btn-secondary {
+  background:transparent; color:var(--white);
+  padding:13px 36px; font-family:var(--font-body); font-size:0.88rem;
+  font-weight:500; letter-spacing:1px; text-transform:uppercase;
+  text-decoration:none; border:1px solid var(--border2); cursor:pointer;
+  transition:border-color .2s, color .2s, transform .15s;
+}
+.btn-secondary:hover { border-color:var(--gray); color:var(--white); transform:translateY(-2px); }
+
+/* HERO STATS STRIP */
+.hero-strip {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  width:100%; max-width:1100px; margin:80px auto 0;
+  border:1px solid var(--border);
+  opacity:0; animation:fadeup .8s ease .9s forwards;
+}
+.hero-strip-item {
+  padding:28px 32px;
+  border-right:1px solid var(--border);
+  text-align:left;
+}
+.hero-strip-item:last-child { border-right:none; }
+.strip-val {
+  font-family:var(--font-display); font-size:2.8rem; font-weight:800;
+  color:var(--white); line-height:1;
+}
+.strip-val .plus { color:var(--red); }
+.strip-label { font-size:0.78rem; color:var(--gray); margin-top:6px; font-weight:400; }
+
+/* TRUSTED BY */
+.trusted-by {
+  padding:40px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  overflow:hidden; background:var(--bg2);
+}
+.trusted-label {
+  text-align:center; font-family:var(--font-mono); font-size:0.65rem;
+  color:var(--gray2); letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:28px;
+}
+.trusted-scroll { overflow:hidden; position:relative; }
+.trusted-track {
+  display:flex; gap:60px; align-items:center;
+  white-space:nowrap; animation:trusted-anim 20s linear infinite;
+}
+@keyframes trusted-anim { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.trusted-item {
+  font-family:var(--font-display); font-size:1.15rem; font-weight:700;
+  color:var(--gray2); letter-spacing:3px; text-transform:uppercase;
+  flex-shrink:0; transition:color .2s;
+}
+.trusted-item:hover { color:var(--gray); }
+
+@keyframes fadeup {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ══════════════════════════
+   REVIEWS SECTION
+══════════════════════════ */
+#reviews {
+  padding:120px 0;
+  background:var(--bg);
+  position:relative; overflow:hidden;
+}
+.section-label {
+  font-family:var(--font-mono); font-size:0.65rem; color:var(--red);
+  letter-spacing:4px; text-transform:uppercase;
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+}
+.section-label::before { content:''; width:30px; height:1px; background:var(--red); }
+.section-title {
+  font-family:var(--font-display); font-size:clamp(2.5rem, 5vw, 4.5rem);
+  font-weight:800; text-transform:uppercase; letter-spacing:-1px;
+  line-height:1; color:var(--white);
+}
+.section-title .hl { color:var(--red); }
+.section-sub {
+  font-size:1rem; font-weight:300; color:var(--gray); margin-top:16px; line-height:1.7;
+}
+.container { max-width:1300px; margin:0 auto; padding:0 60px; }
+@media(max-width:768px) { .container { padding:0 20px; } }
+
+.reviews-header { margin-bottom:60px; }
+
+/* Review cards marquee */
+.rev-marquee { overflow:hidden; margin-bottom:1px; position:relative; }
+.rev-marquee::before, .rev-marquee::after {
+  content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
+}
+.rev-marquee::before { left:0; background:linear-gradient(90deg, var(--bg), transparent); }
+.rev-marquee::after { right:0; background:linear-gradient(-90deg, var(--bg), transparent); }
+.rev-track {
+  display:flex; gap:16px;
+  animation:rev-scroll 35s linear infinite;
+}
+.rev-track.reverse { animation:rev-scroll-rev 38s linear infinite; }
+@keyframes rev-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes rev-scroll-rev { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+.rev-track:hover { animation-play-state:paused; }
+
+.rev-card {
+  background:var(--bg2); border:1px solid var(--border);
+  padding:20px 22px; min-width:300px; max-width:300px;
+  flex-shrink:0; position:relative;
+  transition:border-color .2s, transform .2s;
+}
+.rev-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+.rev-card-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.rev-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--surface2); display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:1rem; font-weight:800; color:var(--gray);
+  flex-shrink:0; overflow:hidden; border:1px solid var(--border2);
+}
+.rev-avatar img { width:100%; height:100%; object-fit:cover; }
+.rev-name { font-weight:700; font-size:0.9rem; }
+.rev-badge {
+  background:var(--red); color:#fff; font-family:var(--font-mono);
+  font-size:0.52rem; letter-spacing:1px; padding:2px 6px; text-transform:uppercase;
+  margin-left:4px;
+}
+.rev-role { font-size:0.72rem; color:var(--gray); margin-top:1px; }
+.rev-text { font-size:0.82rem; color:var(--gray); line-height:1.6; }
+.rev-verified {
+  display:flex; align-items:center; gap:5px;
+  font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2);
+  margin-top:12px; letter-spacing:1px;
+}
+.rev-verified-dot { width:6px; height:6px; border-radius:50%; background:#22c55e; flex-shrink:0; }
+.rev-time { font-size:0.68rem; color:var(--gray2); margin-top:6px; }
+
+/* ══════════════════════════
+   STEPS / HOW IT WORKS
+══════════════════════════ */
+#steps {
+  padding:120px 0;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+}
+.steps-header { margin-bottom:80px; }
+.steps-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--border);
+  border:1px solid var(--border);
+}
+.step-card {
+  background:var(--bg2); padding:48px 40px;
+  position:relative; overflow:hidden;
+  transition:background .3s;
+}
+.step-card:hover { background:var(--bg3); }
+.step-num {
+  font-family:var(--font-display); font-size:5rem; font-weight:900;
+  color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.06);
+  line-height:1; margin-bottom:24px;
+  display:block;
+}
+.step-icon-wrap {
+  width:56px; height:56px; background:var(--surface);
+  border:1px solid var(--border2); margin-bottom:24px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.step-icon-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:var(--red);
+}
+.step-title {
+  font-family:var(--font-display); font-size:1.8rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:0.5px; color:var(--white);
+  margin-bottom:14px;
+}
+.step-desc { font-size:0.9rem; font-weight:300; color:var(--gray); line-height:1.7; }
+
+/* Step feature pills */
+.step-features { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+.step-feat {
+  background:var(--surface); border:1px solid var(--border2);
+  font-family:var(--font-mono); font-size:0.62rem; color:var(--gray);
+  padding:5px 12px; letter-spacing:1px; text-transform:uppercase;
+}
+
+/* Network icons */
+.net-pills { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:28px; }
+.net-pill {
+  background:var(--surface); border:1px solid var(--border2);
+  padding:10px 14px;
+}
+.net-pill-label {
+  font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2);
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:3px;
+}
+.net-pill-val { font-weight:600; font-size:0.82rem; color:var(--white); }
+
+/* ══════════════════════════
+   RESULTS / DATA
+══════════════════════════ */
+#results {
+  padding:120px 0;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+#results::before {
+  content:'72%';
+  position:absolute; right:-40px; top:50%; transform:translateY(-50%);
+  font-family:var(--font-display); font-size:clamp(200px, 35vw, 420px); font-weight:900;
+  color:transparent; -webkit-text-stroke:1px rgba(0,140,255,0.06);
+  pointer-events:none; line-height:1;
+}
+.results-inner {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
+}
+.results-left {}
+.results-big-stat {
+  font-family:var(--font-display); font-size:clamp(6rem, 15vw, 12rem);
+  font-weight:900; line-height:0.9; letter-spacing:-4px; color:var(--white);
+  margin:32px 0 16px;
+}
+.results-big-stat span { color:var(--red); }
+.results-big-label {
+  font-size:1rem; font-weight:300; color:var(--gray); line-height:1.7;
+  max-width:420px;
+}
+.results-tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.results-tag {
+  background:var(--surface); border:1px solid var(--border2);
+  font-family:var(--font-mono); font-size:0.62rem; color:var(--gray);
+  padding:6px 14px; letter-spacing:1px; text-transform:uppercase;
+}
+.results-tag.active { border-color:var(--red); color:var(--red); background:rgba(0,140,255,0.07); }
+
+.results-right {}
+/* FPS Calculator */
+.fps-calc {
+  background:var(--bg2); border:1px solid var(--border2);
+  overflow:hidden;
+}
+.fps-calc-header {
+  background:var(--surface); padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.fps-calc-title {
+  font-family:var(--font-mono); font-size:0.72rem; color:var(--gray);
+  letter-spacing:2px; text-transform:uppercase;
+}
+.fps-calc-status { display:flex; align-items:center; gap:6px; }
+.fps-calc-status-dot { width:6px; height:6px; border-radius:50%; background:var(--red); animation:blink-dot 1s ease infinite; }
+.fps-calc-status-txt { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2); letter-spacing:1px; }
+
+.fps-calc-body { padding:28px 24px; }
+.fps-label { font-family:var(--font-mono); font-size:0.62rem; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
+.fps-game-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:20px;
+}
+.fps-game-btn {
+  background:var(--surface); border:1px solid var(--border);
+  padding:8px 4px; text-align:center; cursor:pointer;
+  font-family:var(--font-mono); font-size:0.6rem; color:var(--gray);
+  letter-spacing:0.5px; transition:all .15s; text-transform:uppercase;
+  border:none; outline:none;
+}
+.fps-game-btn:hover { background:var(--surface2); color:var(--white); }
+.fps-game-btn.active { background:var(--red); color:#fff; }
+
+.fps-slider-wrap { margin-bottom:24px; }
+.fps-slider {
+  width:100%; -webkit-appearance:none; appearance:none;
+  height:3px; background:var(--surface2); outline:none; cursor:pointer;
+  border-radius:0;
+}
+.fps-slider::-webkit-slider-thumb {
+  -webkit-appearance:none; width:18px; height:18px;
+  background:var(--red); cursor:pointer; clip-path:none; border-radius:0;
+  box-shadow:0 0 10px rgba(232,25,44,0.5);
+}
+.fps-slider-labels { display:flex; justify-content:space-between; margin-top:6px; }
+.fps-slider-lbl { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2); }
+
+.fps-result {
+  background:var(--bg); border:1px solid var(--border);
+  padding:20px 22px; display:flex; align-items:center; justify-content:space-between;
+  margin-top:4px;
+}
+.fps-result-left {}
+.fps-result-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2); letter-spacing:2px; margin-bottom:4px; }
+.fps-result-val {
+  font-family:var(--font-display); font-size:3.5rem; font-weight:900;
+  line-height:1; color:var(--white);
+}
+.fps-result-val .fps-unit { font-size:1.2rem; color:var(--gray); margin-left:4px; }
+.fps-result-right { text-align:right; }
+.fps-gain {
+  font-family:var(--font-display); font-size:2.2rem; font-weight:800;
+  color:var(--red);
+}
+.fps-gain-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray2); letter-spacing:2px; margin-top:3px; }
+
+.fps-bar-wrap { margin-top:16px; }
+.fps-bar-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.fps-bar-name { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray); width:50px; flex-shrink:0; letter-spacing:1px; }
+.fps-bar-track { flex:1; height:4px; background:var(--surface2); position:relative; overflow:hidden; }
+.fps-bar-fill { height:100%; position:absolute; left:0; top:0; transition:width .5s cubic-bezier(0.16,1,0.3,1); }
+.fps-bar-fill.before { background:var(--gray2); }
+.fps-bar-fill.after { background:var(--red); box-shadow:0 0 8px rgba(232,25,44,0.4); }
+.fps-bar-pct { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray); width:40px; text-align:right; flex-shrink:0; }
+
+/* ══════════════════════════
+   METHODS
+══════════════════════════ */
+#methods {
+  padding:120px 0;
+  background:var(--bg2); border-top:1px solid var(--border);
+}
+.methods-header { margin-bottom:64px; }
+.methods-grid { display:flex; flex-direction:column; gap:1px; }
+.method-row {
+  background:var(--bg2); border:1px solid var(--border);
+  display:grid; grid-template-columns:200px 1fr 200px;
+  align-items:center; padding:0;
+  transition:background .2s;
+  overflow:hidden;
+}
+.method-row:hover { background:var(--bg3); }
+.method-name-cell {
+  padding:24px 32px; border-right:1px solid var(--border);
+  height:100%; display:flex; flex-direction:column; justify-content:center;
+}
+.method-name {
+  font-family:var(--font-display); font-size:1.15rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:1px; color:var(--white);
+}
+.method-sub { font-size:0.75rem; color:var(--gray); margin-top:3px; }
+.method-desc-cell { padding:24px 40px; }
+.method-desc { font-size:0.88rem; font-weight:300; color:var(--gray); line-height:1.6; }
+.method-gain-cell {
+  padding:24px 32px; border-left:1px solid var(--border);
+  text-align:right; height:100%; display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-end;
+}
+.method-gain-val {
+  font-family:var(--font-display); font-size:1.8rem; font-weight:800;
+  color:var(--red);
+}
+.method-gain-lbl { font-family:var(--font-mono); font-size:0.58rem; color:var(--gray2); letter-spacing:2px; margin-top:3px; }
+
+/* ULTIMATE ROW */
+.method-row.ultimate {
+  background:var(--red);
+  border-color:var(--red);
+}
+.method-row.ultimate .method-name { color:#fff; }
+.method-row.ultimate .method-sub { color:rgba(255,255,255,0.6); }
+.method-row.ultimate .method-desc { color:rgba(255,255,255,0.7); }
+.method-row.ultimate .method-gain-val { color:#fff; font-size:2.4rem; }
+.method-row.ultimate .method-gain-lbl { color:rgba(255,255,255,0.6); }
+.method-row.ultimate .method-name-cell,
+.method-row.ultimate .method-gain-cell { border-color:rgba(255,255,255,0.2); }
+
+/* ══════════════════════════
+   PLANS
+══════════════════════════ */
+#plans {
+  padding:120px 0;
+  background:var(--bg); border-top:1px solid var(--border);
+}
+.plans-header { margin-bottom:64px; }
+.plans-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--border);
+  border:1px solid var(--border);
+}
+.plan-card {
+  background:var(--bg2); padding:40px 32px;
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+  transition:background .25s;
+}
+.plan-card:hover { background:var(--bg3); }
+.plan-card.featured {
+  background:var(--surface);
+  border-color: rgba(0,170,255,0.35);
+  box-shadow: 0 0 40px rgba(0,170,255,0.08), inset 0 0 60px rgba(0,170,255,0.03);
+}
+.plan-card.featured::before {
+  content:'MÁS POPULAR';
+  position:absolute; top:0; left:0; right:0;
+  background:var(--red); color:#fff; text-align:center;
+  font-family:var(--font-mono); font-size:0.62rem; letter-spacing:3px;
+  padding:6px; text-transform:uppercase;
+}
+.plan-card.featured { padding-top:56px; }
+
+.plan-img {
+  width:100%; height:160px; object-fit:cover;
+  margin-bottom:24px; filter:brightness(0.7); background:var(--surface);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; position:relative;
+}
+.plan-img-placeholder {
+  width:100%; height:160px; background:var(--surface);
+  border:1px solid var(--border2); margin-bottom:24px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.plan-img-placeholder::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, transparent 40%, rgba(0,140,255,0.07) 100%);
+}
+.plan-img-icon {
+  font-family:var(--font-display); font-size:3rem; font-weight:900;
+  color:rgba(255,255,255,0.05); letter-spacing:2px;
+}
+.plan-name {
+  font-family:var(--font-display); font-size:1.6rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:1px; color:var(--white);
+  margin-bottom:6px;
+}
+.plan-price {
+  font-family:var(--font-display); font-size:2.6rem; font-weight:800;
+  color:var(--white); line-height:1; margin-bottom:4px;
+}
+.plan-price .currency { font-size:1.4rem; vertical-align:top; margin-top:4px; display:inline-block; color:var(--gray); }
+.plan-price .period { font-size:0.9rem; color:var(--gray); font-family:var(--font-body); font-weight:400; }
+.plan-duration { font-family:var(--font-mono); font-size:0.65rem; color:var(--gray2); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+.plan-tagline { font-size:0.85rem; font-weight:300; color:var(--gray); line-height:1.6; margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--border); }
+
+.plan-features { list-style:none; flex:1; margin-bottom:32px; }
+.plan-feat {
+  display:flex; align-items:center; gap:10px;
+  padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:0.82rem; color:var(--gray);
+}
+.plan-feat:last-child { border-bottom:none; }
+.plan-feat-icon { width:16px; height:16px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.plan-feat.included .plan-feat-icon { color:var(--red); }
+.plan-feat.excluded { opacity:0.35; }
+.plan-feat.excluded .plan-feat-icon { color:var(--gray2); }
+
+.plan-btn {
+  display:block; text-align:center; padding:13px;
+  font-family:var(--font-body); font-size:0.82rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  text-decoration:none; cursor:pointer; transition:all .2s;
+  background:transparent; border:1px solid var(--border2); color:var(--white);
+}
+.plan-btn:hover { border-color:var(--gray); }
+.plan-btn.primary { background:var(--red); border-color:var(--red); color:#fff; }
+.plan-btn.primary:hover { background:#00ccff; box-shadow:0 4px 20px rgba(0,170,255,0.35); }
+
+.plans-note {
+  text-align:center; margin-top:40px;
+  font-size:0.85rem; color:var(--gray);
+}
+.plans-note a { color:var(--red); text-decoration:none; }
+
+/* ══════════════════════════
+   GAMES
+══════════════════════════ */
+#games {
+  padding:100px 0; background:var(--bg2); border-top:1px solid var(--border);
+}
+.games-header { margin-bottom:48px; }
+.games-scroller {
+  position:relative; overflow:hidden;
+}
+.games-scroller::before, .games-scroller::after {
+  content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
+}
+.games-scroller::before { left:0; background:linear-gradient(90deg, var(--bg2), transparent); }
+.games-scroller::after { right:0; background:linear-gradient(-90deg, var(--bg2), transparent); }
+.games-track {
+  display:flex; gap:10px;
+  animation:games-scroll 22s linear infinite;
+}
+@keyframes games-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.game-chip {
+  background:var(--surface); border:1px solid var(--border);
+  padding:10px 20px; flex-shrink:0;
+  font-family:var(--font-display); font-size:0.9rem; font-weight:700;
+  letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+  transition:all .15s; white-space:nowrap;
+}
+.game-chip:hover { color:var(--white); border-color:var(--border2); }
+.game-chip .chip-fps {
+  font-family:var(--font-mono); font-size:0.58rem; color:var(--red);
+  display:block; letter-spacing:1px; margin-top:2px;
+}
+
+/* ══════════════════════════
+   FAQ
+══════════════════════════ */
+#faq {
+  padding:120px 0; background:var(--bg); border-top:1px solid var(--border);
+}
+.faq-inner { display:grid; grid-template-columns:1fr 2fr; gap:80px; }
+.faq-left {}
+.faq-list {}
+.faq-item {
+  border-bottom:1px solid var(--border);
+}
+.faq-q {
+  width:100%; text-align:left; padding:20px 0;
+  background:none; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  font-family:var(--font-body); font-size:0.95rem; font-weight:500;
+  color:var(--white); line-height:1.4;
+}
+.faq-q:hover { color:var(--red); }
+.faq-q-icon {
+  width:24px; height:24px; border:1px solid var(--border2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; color:var(--gray); flex-shrink:0;
+  transition:transform .3s, background .2s, border-color .2s;
+}
+.faq-q.open .faq-q-icon { transform:rotate(45deg); background:var(--red); border-color:var(--red); color:#fff; }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+.faq-a.open { max-height:300px; }
+.faq-a-inner { padding:0 0 20px; font-size:0.88rem; font-weight:300; color:var(--gray); line-height:1.7; }
+
+/* ══════════════════════════
+   CTA FINAL
+══════════════════════════ */
+#cta {
+  padding:120px 0; background:var(--bg2);
+  border-top:1px solid var(--border);
+  text-align:center; position:relative; overflow:hidden;
+}
+#cta::before {
+  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+  background:radial-gradient(ellipse at 50% 50%, rgba(0,140,255,0.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-inner { position:relative; z-index:1; }
+.cta-title {
+  font-family:var(--font-display); font-size:clamp(3rem, 8vw, 7rem);
+  font-weight:900; text-transform:uppercase; letter-spacing:-2px;
+  line-height:0.9; color:var(--white); margin:24px 0;
+}
+.cta-title .hl { color:var(--red); }
+.cta-sub {
+  font-size:1rem; font-weight:300; color:var(--gray);
+  max-width:500px; margin:0 auto 48px; line-height:1.7;
+}
+.cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:48px; }
+.cta-trust { display:flex; align-items:center; justify-content:center; gap:32px; flex-wrap:wrap; }
+.cta-trust-item {
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:0.65rem; color:var(--gray);
+  letter-spacing:1.5px; text-transform:uppercase;
+}
+.cta-trust-item::before { content:'✓'; color:var(--red); font-weight:700; }
+
+/* ══════════════════════════
+   FOOTER
+══════════════════════════ */
+footer {
+  padding:60px 0 40px; background:var(--bg);
+  border-top:1px solid var(--border);
+}
+.footer-top {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px; padding-bottom:48px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:32px;
+}
+.footer-brand-logo {
+  font-family:var(--font-display); font-size:1.4rem; font-weight:800;
+  letter-spacing:3px; color:var(--white); text-transform:uppercase;
+  display:flex; align-items:center; gap:10px; margin-bottom:16px;
+}
+.footer-brand-desc { font-size:0.85rem; font-weight:300; color:var(--gray); line-height:1.7; max-width:300px; }
+.footer-col-title {
+  font-family:var(--font-mono); font-size:0.65rem; color:var(--gray2);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col a { font-size:0.85rem; color:var(--gray); text-decoration:none; transition:color .2s; }
+.footer-col a:hover { color:var(--white); }
+.footer-bottom {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+}
+.footer-copy { font-size:0.78rem; color:var(--gray2); }
+.footer-pay { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.pay-icon {
+  background:var(--surface); border:1px solid var(--border);
+  padding:6px 12px; font-family:var(--font-mono); font-size:0.62rem;
+  color:var(--gray); letter-spacing:1px; text-transform:uppercase;
+}
+
+/* ══════════════════════════
+   SCROLL REVEAL
+══════════════════════════ */
+.sr { opacity:0; transform:translateY(40px); transition:opacity .7s ease, transform .7s ease; }
+.sr.vis { opacity:1; transform:translateY(0); }
+.sr-l { opacity:0; transform:translateX(-30px); transition:opacity .7s ease, transform .7s ease; }
+.sr-l.vis { opacity:1; transform:translateX(0); }
+.sr-r { opacity:0; transform:translateX(30px); transition:opacity .7s ease, transform .7s ease; }
+.sr-r.vis { opacity:1; transform:translateX(0); }
+
+/* ══════════════════════════
+   OPTI-GUIDE MODAL
+══════════════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; z-index:99999;
+  background:rgba(0,0,0,0.85); backdrop-filter:blur(10px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--bg2); border:1px solid var(--border2);
+  width:100%; max-width:560px; max-height:90vh; overflow-y:auto;
+  position:relative;
+}
+.modal-header {
+  padding:20px 28px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.modal-title {
+  font-family:var(--font-display); font-size:1.3rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:2px;
+}
+.modal-close {
+  background:none; border:1px solid var(--border); color:var(--gray);
+  width:32px; height:32px; cursor:pointer; font-size:1.1rem;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.modal-close:hover { background:var(--red); border-color:var(--red); color:#fff; }
+.modal-body { padding:28px; }
+.modal-step { display:none; }
+.modal-step.active { display:block; }
+.modal-q { font-size:1rem; font-weight:500; color:var(--white); margin-bottom:20px; line-height:1.5; }
+.modal-opts { display:flex; flex-direction:column; gap:8px; }
+.modal-opt {
+  background:var(--surface); border:1px solid var(--border);
+  padding:14px 18px; cursor:pointer; text-align:left;
+  font-family:var(--font-body); font-size:0.88rem; color:var(--gray);
+  transition:all .15s;
+}
+.modal-opt:hover { border-color:var(--red); color:var(--white); background:rgba(0,140,255,0.07); }
+.modal-result {
+  text-align:center; padding:20px 0;
+}
+.modal-result-plan {
+  font-family:var(--font-display); font-size:2.5rem; font-weight:900;
+  color:var(--red); text-transform:uppercase; margin-bottom:8px;
+}
+.modal-result-desc { font-size:0.9rem; color:var(--gray); line-height:1.6; margin-bottom:24px; }
+.modal-progress { display:flex; gap:4px; margin-bottom:24px; }
+.modal-prog-step { flex:1; height:3px; background:var(--surface2); transition:background .3s; }
+.modal-prog-step.done { background:var(--red); }
+
+/* ══════════════════════════
+   RESERVATION FORM
+══════════════════════════ */
+.reserve-modal .modal { max-width:640px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-group.full { grid-column:1/-1; }
+.form-lbl {
+  font-family:var(--font-mono); font-size:0.62rem; color:var(--gray);
+  letter-spacing:2px; text-transform:uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  background:var(--surface); border:1px solid var(--border2);
+  color:var(--white); padding:12px 14px;
+  font-family:var(--font-body); font-size:0.9rem;
+  outline:none; transition:border-color .2s;
+  width:100%; appearance:none; -webkit-appearance:none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--red); }
+.form-textarea { min-height:80px; resize:vertical; }
+.form-select option { background:var(--bg2); }
+.form-submit {
+  width:100%; padding:14px; background:var(--red); border:none;
+  color:#fff; font-family:var(--font-body); font-size:0.9rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  transition:background .2s, box-shadow .2s; margin-top:4px;
+}
+.form-submit:hover { background:#00ccff; box-shadow:0 4px 20px rgba(0,170,255,0.3); }
+
+/* ══════════════════════════
+   MOBILE
+══════════════════════════ */
+.hamburger { display:none; background:none; border:1px solid var(--border); padding:8px 10px; cursor:pointer; color:var(--white); font-size:1.1rem; }
+
+@media(max-width:1024px) {
+  .plans-grid { grid-template-columns:repeat(2,1fr); }
+  .results-inner { grid-template-columns:1fr; gap:48px; }
+  #results::before { display:none; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
+}
+@media(max-width:768px) {
+  .hero-strip { grid-template-columns:repeat(2,1fr); }
+  .steps-grid { grid-template-columns:1fr; }
+  .plans-grid { grid-template-columns:1fr; }
+  .faq-inner { grid-template-columns:1fr; }
+  .method-row { grid-template-columns:1fr; }
+  .method-gain-cell, .method-name-cell { border:none; }
+  .nav-links { display:none; }
+  .hamburger { display:flex; align-items:center; }
+  .footer-top { grid-template-columns:1fr; }
+  .hero-h1 { font-size:clamp(3rem, 18vw, 6rem); }
+  .form-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    PULSE HARDWARE
+  </a>
+  <ul class="nav-links">
+    <li><a href="#steps">Proceso</a></li>
+    <li><a href="#results">Resultados</a></li>
+    <li><a href="#methods">Métodos</a></li>
+    <li><a href="#plans">Planes</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li>
+      <a href="#" class="nav-cta" onclick="openReserve(event)">Reservar Turno</a>
+    </li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-status-dot"></div>
+    <span class="nav-engineers">INGENIEROS DISPONIBLES</span>
+    <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+
+  <!-- Ticker -->
+  <div class="hero-ticker" aria-hidden="true">
+    <div class="hero-ticker-track">
+      <span>OPTIMIZACIÓN GAMING</span> · FPS BOOST · INPUT LAG REDUCIDO · BIOS TUNING · RAM TIMINGS · OVERCLOCK · ZERO STUTTER · <span>OPTIMIZACIÓN GAMING</span> · FPS BOOST · INPUT LAG REDUCIDO · BIOS TUNING · RAM TIMINGS · OVERCLOCK · ZERO STUTTER · <span>OPTIMIZACIÓN GAMING</span> · FPS BOOST · INPUT LAG REDUCIDO · BIOS TUNING · RAM TIMINGS · OVERCLOCK · ZERO STUTTER · <span>OPTIMIZACIÓN GAMING</span> · FPS BOOST · INPUT LAG REDUCIDO · BIOS TUNING · RAM TIMINGS · OVERCLOCK · ZERO STUTTER ·
+    </div>
+  </div>
+
+  <div class="hero-eyebrow">SERVICIO DE OPTIMIZACIÓN PC PARA GAMING</div>
+
+  <h1 class="hero-h1">
+    MÁXIMO<br>
+    <span class="accent">RENDIMIENTO</span><br>
+    <span class="outline">GARANTIZADO</span>
+  </h1>
+
+  <p class="hero-sub">
+    Optimización gaming profesional hecha a medida de <strong>TU</strong> hardware. Todos los juegos soportados. Mejora de FPS significativa y reducción de input lag. El máximo rendimiento, desbloqueado.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#results" class="btn-primary">Ver Resultados</a>
+    <a href="#plans" class="btn-secondary">Ver Planes →</a>
+  </div>
+
+  <div class="hero-strip">
+    <div class="hero-strip-item">
+      <div class="strip-val"><span class="plus">+</span><span class="counter" data-target="72">0</span>%</div>
+      <div class="strip-label">FPS Promedio Ganados</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="strip-val"><span class="counter" data-target="3500">0</span><span class="plus">+</span></div>
+      <div class="strip-label">PCs Optimizadas</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="strip-val"><span style="font-size:2rem">TODOS</span></div>
+      <div class="strip-label">Juegos Soportados</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="strip-val">100%</div>
+      <div class="strip-label">Seguro Para Tu Hardware</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<div class="trusted-by" aria-hidden="true">
+  <div class="trusted-label">Confiado por los mejores</div>
+  <div class="trusted-scroll">
+    <div class="trusted-track">
+      <span class="trusted-item">CS2</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Valorant</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Fortnite</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Apex Legends</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Warzone</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Rainbow Six</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Overwatch 2</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Escape From Tarkov</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <!-- duplicated for loop -->
+      <span class="trusted-item">CS2</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Valorant</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Fortnite</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Apex Legends</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Warzone</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Rainbow Six</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Overwatch 2</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+      <span class="trusted-item">Escape From Tarkov</span>
+      <span class="trusted-item" style="color:var(--red)">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REVIEWS ══ -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header sr">
+      <div class="section-label">JUGADORES REALES</div>
+      <h2 class="section-title">Potenciando a los <span class="hl">Mejores</span></h2>
+      <p class="section-sub">Por qué jugadores como vos eligen PULSE HARDWARE.</p>
+      <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--gray2);margin-top:14px;letter-spacing:1px;">
+        Para más resultados y testimonios →
+        <a href="https://www.instagram.com/pulse_hardware?igsh=aTdsaDBzYWxsYmI%3D&utm_source=qr" target="_blank" rel="noopener"
+           style="color:var(--red);text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+          @pulse_hardware ↗
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Row 1 -->
+  <div class="rev-marquee" style="margin-bottom:10px;">
+    <div class="rev-track" id="revRow1">
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">M</div>
+          <div>
+            <div class="rev-name">Matías G. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Competitivo</div>
+          </div>
+        </div>
+        <p class="rev-text">Pasé de 90fps a 210fps en CS2. No lo podía creer. Pensaba que era el hardware pero era todo configuración.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">8:09 AM · 11 Jul 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">S</div>
+          <div>
+            <div class="rev-name">Sofía R. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Content Creator</div>
+          </div>
+        </div>
+        <p class="rev-text">El input lag se notó instantáneo. Los clicks registran antes, el mouse se siente más suave. Para Valorant fue clave.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">11:35 AM · 16 Feb 2026</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">N</div>
+          <div>
+            <div class="rev-name">Nicolás P. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Competitivo</div>
+          </div>
+        </div>
+        <p class="rev-text">Tenía una RTX 4070 que casi no usaba al 100%. Ahora la veo a full todo el tiempo. La diferencia es brutal.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">3:22 PM · 13 Feb 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">T</div>
+          <div>
+            <div class="rev-name">Tomás V. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Streamer</div>
+          </div>
+        </div>
+        <p class="rev-text">Mi PC estaba llena de basura. En 2 horas quedó como nueva. Fortnite que antes iba a 60fps ahora va a 144 estables.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">8:51 AM · 9 Nov 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">L</div>
+          <div>
+            <div class="rev-name">Lucas M. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Competitivo</div>
+          </div>
+        </div>
+        <p class="rev-text">Lo mejor fue ver todo en tiempo real. Entendí por qué mi PC funcionaba mal. Muy profesional el servicio.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">2:34 PM · 24 Jan 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">V</div>
+          <div>
+            <div class="rev-name">Valentina C. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Content Creator</div>
+          </div>
+        </div>
+        <p class="rev-text">La RAM estaba corriendo a 2133MHz y era de 3600. Eso sólo fue un cambiazo. El resto fue la frutilla del postre.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">2:35 AM · 13 Feb 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2 reverse -->
+  <div class="rev-marquee">
+    <div class="rev-track reverse" id="revRow2">
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">D</div>
+          <div>
+            <div class="rev-name">Diego A. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Competitivo</div>
+          </div>
+        </div>
+        <p class="rev-text">Warzone era injugable. 55fps y micro stutters cada 2 segundos. Ahora va fluido a 110fps. Diferencia día y noche.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">8:39 PM · 27 May 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">A</div>
+          <div>
+            <div class="rev-name">Agustina F. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Streamer</div>
+          </div>
+        </div>
+        <p class="rev-text">Hice el Elite y quedé con las temperaturas 15° más bajas. No había pasta térmica casi. Todo documentado.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">6:45 AM · 19 Jun 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">R</div>
+          <div>
+            <div class="rev-name">Roberto H. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Casual</div>
+          </div>
+        </div>
+        <p class="rev-text">Pensé que era exagerado pagar por optimización. Probé el Essential y en una semana hice el upgrade al Elite. Vale.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">9:14 PM · 2 Feb 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">C</div>
+          <div>
+            <div class="rev-name">Camila S. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugadora Competitiva</div>
+          </div>
+        </div>
+        <p class="rev-text">El soporte de 30 días fue clave. Me quedé con dudas post-sesión y me respondieron todo al toque. Muy buena onda.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">7:55 AM · 3 May 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">F</div>
+          <div>
+            <div class="rev-name">Facundo B. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Jugador Competitivo</div>
+          </div>
+        </div>
+        <p class="rev-text">Apex pasó de 80fps con drops a 190fps sólidos. En ranked se nota el skill gap cuando no laggea la PC.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">11:15 AM · 13 Feb 2025</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-header">
+          <div class="rev-avatar">I</div>
+          <div>
+            <div class="rev-name">Ignacio L. <span class="rev-badge">★</span></div>
+            <div class="rev-role">Fundador Equipo eSports</div>
+          </div>
+        </div>
+        <p class="rev-text">100% recomendado. Coordinamos por WhatsApp, se conectaron a la noche y en 2 horas PC transformada.</p>
+        <div class="rev-verified"><div class="rev-verified-dot"></div> Reseña Verificada</div>
+        <div class="rev-time">8:09 AM · 20 Jun 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STEPS ══ -->
+<section id="steps">
+  <div class="container">
+    <div class="steps-header sr">
+      <div class="section-label">CÓMO FUNCIONA</div>
+      <h2 class="section-title">Tres Pasos.<br>Eso Es Todo.</h2>
+      <p class="section-sub">Sin complicaciones. Sin esperas eternas. Así funciona una sesión.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="steps-grid sr">
+      <div class="step-card">
+        <span class="step-num">01</span>
+        <div class="step-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
+        <div class="step-title">Elegí un Horario</div>
+        <p class="step-desc">Seleccioná un horario disponible y reservá. Recibís instrucciones de preparación y soporte antes de que comience tu sesión.</p>
+        <div class="step-features">
+          <div class="step-feat">Mismo día</div>
+          <div class="step-feat">Confirmación inmediata</div>
+          <div class="step-feat">Sin esperas</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <span class="step-num">02</span>
+        <div class="step-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="step-title">Nosotros Hacemos Todo</div>
+        <p class="step-desc">Un ingeniero dedicado ajusta tu BIOS, Windows, red y configuración en juego de forma remota. En solo 15–25 minutos tu PC queda optimizada. Mirá en vivo o relajate.</p>
+        <div class="net-pills">
+          <div class="net-pill"><div class="net-pill-label">Conexión</div><div class="net-pill-val">AnyDesk</div></div>
+          <div class="net-pill"><div class="net-pill-label">Seguridad</div><div class="net-pill-val">TLS 1.2</div></div>
+          <div class="net-pill"><div class="net-pill-label">Duración</div><div class="net-pill-val">15–25 min</div></div>
+          <div class="net-pill"><div class="net-pill-label">Control</div><div class="net-pill-val">100% tuyo</div></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <span class="step-num">03</span>
+        <div class="step-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="step-title">Jugá y Sentí la Diferencia</div>
+        <p class="step-desc">Abrí tu juego y disfrutá que tu PC finalmente funciona como debería. Frames al máximo, input lag eliminado, todos los problemas resueltos.</p>
+        <div class="step-features">
+          <div class="step-feat">Red optimizada</div>
+          <div class="step-feat">FPS máximos</div>
+          <div class="step-feat">Baja latencia</div>
+          <div class="step-feat">Zero stutter</div>
+          <div class="step-feat">Frames estables</div>
+          <div class="step-feat">Input 1:1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS ══ -->
+<section id="results">
+  <div class="container">
+    <div class="results-inner">
+      <div class="results-left sr-l">
+        <div class="section-label">DATOS REALES</div>
+        <h2 class="section-title">Resultados Reales<br>Respaldados<br><span class="hl">Por Datos.</span></h2>
+        <div class="results-big-stat"><span>+</span>72%</div>
+        <p class="results-big-label">FPS promedio ganados. FRAMES ESTABLES + ULTRA BAJA LATENCIA = CAMBIO ABSOLUTO DE JUEGO.</p>
+        <div class="results-tags">
+          <span class="results-tag active">100% Seguro</span>
+          <span class="results-tag">Input Latencia Mínima</span>
+          <span class="results-tag">Ganancias Verificadas</span>
+          <span class="results-tag">Sesiones el Mismo Día</span>
+          <span class="results-tag">+1000 Sistemas</span>
+        </div>
+      </div>
+
+      <div class="results-right sr-r">
+        <!-- FPS CALCULATOR -->
+        <div class="fps-calc">
+          <div class="fps-calc-header">
+            <span class="fps-calc-title">// CALCULADORA DE FPS ESTIMADA</span>
+            <div class="fps-calc-status">
+              <div class="fps-calc-status-dot"></div>
+              <span class="fps-calc-status-txt">EN VIVO</span>
+            </div>
+          </div>
+          <div class="fps-calc-body">
+            <div class="fps-label">SELECCIONÁ TU JUEGO</div>
+            <div class="fps-game-grid">
+              <button class="fps-game-btn active" data-game="cs2" onclick="selectGame(this)">CS2</button>
+              <button class="fps-game-btn" data-game="valorant" onclick="selectGame(this)">VALORANT</button>
+              <button class="fps-game-btn" data-game="fortnite" onclick="selectGame(this)">FORTNITE</button>
+              <button class="fps-game-btn" data-game="apex" onclick="selectGame(this)">APEX</button>
+              <button class="fps-game-btn" data-game="warzone" onclick="selectGame(this)">WARZONE</button>
+              <button class="fps-game-btn" data-game="r6" onclick="selectGame(this)">R6S</button>
+              <button class="fps-game-btn" data-game="ow2" onclick="selectGame(this)">OW2</button>
+              <button class="fps-game-btn" data-game="pubg" onclick="selectGame(this)">PUBG</button>
+            </div>
+
+            <div class="fps-slider-wrap">
+              <div class="fps-label">TUS FPS ACTUALES: <span id="fpsCurrentVal" style="color:var(--white)">120</span></div>
+              <input type="range" class="fps-slider" id="fpsSlider" min="30" max="400" value="120" oninput="updateCalc()">
+              <div class="fps-slider-labels">
+                <span class="fps-slider-lbl">30</span>
+                <span class="fps-slider-lbl">100</span>
+                <span class="fps-slider-lbl">200</span>
+                <span class="fps-slider-lbl">300</span>
+                <span class="fps-slider-lbl">400+</span>
+              </div>
+            </div>
+
+            <div class="fps-result">
+              <div class="fps-result-left">
+                <div class="fps-result-label">FPS POST-OPTIMIZACIÓN</div>
+                <div class="fps-result-val"><span id="fpsAfter">198</span><span class="fps-unit">fps</span></div>
+              </div>
+              <div class="fps-result-right">
+                <div class="fps-gain">+<span id="fpsGainPct">65</span>%</div>
+                <div class="fps-gain-label">GANANCIA ESTIMADA</div>
+              </div>
+            </div>
+
+            <div class="fps-bar-wrap" style="margin-top:16px;">
+              <div class="fps-bar-row">
+                <span class="fps-bar-name">ANTES</span>
+                <div class="fps-bar-track">
+                  <div class="fps-bar-fill before" id="barBefore" style="width:30%"></div>
+                </div>
+                <span class="fps-bar-pct" id="barBeforePct">120fps</span>
+              </div>
+              <div class="fps-bar-row">
+                <span class="fps-bar-name">DESPUÉS</span>
+                <div class="fps-bar-track">
+                  <div class="fps-bar-fill after" id="barAfter" style="width:50%"></div>
+                </div>
+                <span class="fps-bar-pct" id="barAfterPct">198fps</span>
+              </div>
+            </div>
+
+            <p style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gray2);margin-top:14px;letter-spacing:0.5px;line-height:1.5;">
+              * Estimación basada en cientos de sesiones reales. Los resultados varían según el estado actual de la PC.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METHODS ══ -->
+<section id="methods">
+  <div class="container">
+    <div class="methods-header sr">
+      <div class="section-label">TÉCNICAS</div>
+      <h2 class="section-title">Nunca Te Conformes<br>Con <span class="hl">"Suficiente"</span></h2>
+      <p class="section-sub">El gameplay perfecto requiere rendimiento perfecto.</p>
+    </div>
+    <div class="methods-grid sr">
+      <div class="method-row">
+        <div class="method-name-cell">
+          <div class="method-name">Windows</div>
+          <div class="method-sub">Optimización Completa del SO</div>
+        </div>
+        <div class="method-desc-cell">
+          <p class="method-desc">Eliminamos bloatware, telemetría, procesos en segundo plano, y configuramos el sistema operativo específicamente para gaming. Cada ajuste de Windows optimizado para máxima velocidad y respuesta.</p>
+        </div>
+        <div class="method-gain-cell">
+          <div class="method-gain-val">+8–25%</div>
+          <div class="method-gain-lbl">FPS BOOST</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <div class="method-name-cell">
+          <div class="method-name">BIOS</div>
+          <div class="method-sub">Configuraciones Ocultas</div>
+        </div>
+        <div class="method-desc-cell">
+          <p class="method-desc">Accedemos a configuraciones avanzadas del BIOS que el fabricante no expone fácilmente. Ajustes de power delivery, latencias y configuración de CPU/GPU para extraer cada bit de rendimiento.</p>
+        </div>
+        <div class="method-gain-cell">
+          <div class="method-gain-val">+5–18%</div>
+          <div class="method-gain-lbl">FPS BOOST</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <div class="method-name-cell">
+          <div class="method-name">Overclock</div>
+          <div class="method-sub">Clocks, Voltaje & Thermals</div>
+        </div>
+        <div class="method-desc-cell">
+          <p class="method-desc">Overclock estable y seguro de CPU y GPU con monitoreo térmico. Encontramos el punto óptimo entre rendimiento y temperatura para tu hardware específico, sin comprometer la vida útil.</p>
+        </div>
+        <div class="method-gain-cell">
+          <div class="method-gain-val">+4–15%</div>
+          <div class="method-gain-lbl">FPS BOOST</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <div class="method-name-cell">
+          <div class="method-name">RAM</div>
+          <div class="method-sub">Timings & Frecuencia</div>
+        </div>
+        <div class="method-desc-cell">
+          <p class="method-desc">Configuramos XMP/EXPO correctamente y ajustamos timings secundarios y terciarios de la RAM para obtener el máximo ancho de banda y mínima latencia. La mayoría de las PCs nunca corren la RAM a su velocidad real.</p>
+        </div>
+        <div class="method-gain-cell">
+          <div class="method-gain-val">+3–12%</div>
+          <div class="method-gain-lbl">FPS BOOST</div>
+        </div>
+      </div>
+      <div class="method-row ultimate">
+        <div class="method-name-cell">
+          <div class="method-name">Tu PC</div>
+          <div class="method-sub">Completamente Optimizada</div>
+        </div>
+        <div class="method-desc-cell">
+          <p class="method-desc">La suma de todos los métodos, ejecutados correctamente y en orden para TU hardware. Resultados verificados antes y después con benchmarks. Así se ve una PC realmente optimizada.</p>
+        </div>
+        <div class="method-gain-cell">
+          <div class="method-gain-val">+50–72%</div>
+          <div class="method-gain-lbl">FPS TOTAL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLANS ══ -->
+<section id="plans">
+  <div class="container">
+    <div class="plans-header sr">
+      <div class="section-label">PLANES</div>
+      <h2 class="section-title">Es Hora de Tomar<br><span class="hl">El Control</span></h2>
+      <p class="section-sub">Tres tiers. El mismo estándar de oro. Para los mejores — de los mejores.</p>
+    </div>
+
+    <div class="plans-grid sr">
+      <!-- Essential --><!-- Essential -->
+      <div class="plan-card">
+        <div class="plan-img-placeholder"><div class="plan-img-icon">ESS</div></div>
+        <div class="plan-name">Essential</div>
+        <div class="plan-price"><span class="currency">$</span>45.000 <span class="period">ARS</span></div>
+        <div class="plan-duration">Sesión 15–25 Min — Windows, Juego & Red</div>
+        <p class="plan-tagline">Para un sistema más rápido y limpio con rendimiento de red y juego mejorado. Ideal para un boost de respuesta inmediato.</p>
+        <ul class="plan-features">
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Windows</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización de Red</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Configuración en Juego</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Input</li>
+          <li class="plan-feat excluded"><span class="plan-feat-icon">—</span> BIOS & Overclock</li>
+          <li class="plan-feat excluded"><span class="plan-feat-icon">—</span> Timings RAM Avanzados</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="openReserve(event)">Reservar Ahora</a>
+      </div>
+
+      <!-- Performance -->
+      <div class="plan-card">
+        <div class="plan-img-placeholder"><div class="plan-img-icon">PRO</div></div>
+        <div class="plan-name">Performance</div>
+        <div class="plan-price"><span class="currency">$</span>65.000 <span class="period">ARS</span></div>
+        <div class="plan-duration">Sesión 20–30 Min — Essential + BIOS, Overclock & Latencia</div>
+        <p class="plan-tagline">Para jugadores competitivos que quieren llevar su rendimiento al siguiente nivel. BIOS completo, configuraciones ocultas y optimización de input incluidos.</p>
+        <ul class="plan-features">
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Windows</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización de Red & DNS</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> BIOS & Configuraciones Ocultas</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Overclock CPU/GPU</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Input & Mouse Polling</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Limpieza de Drivers & Bloatware</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> GPU Shader Cache & Driver Tweak</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Configuración Monitor & Refresh Rate</li>
+          <li class="plan-feat excluded"><span class="plan-feat-icon">—</span> Timings RAM Avanzados (tRCD/tCL/tRP)</li>
+          <li class="plan-feat excluded"><span class="plan-feat-icon">—</span> Reporte de Benchmarks Certificado</li>
+          <li class="plan-feat excluded"><span class="plan-feat-icon">—</span> Garantía de Mejora Documentada</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="openReserve(event)">Reservar Ahora</a>
+      </div>
+
+      <!-- Elite -->
+      <div class="plan-card featured">
+        <div class="plan-img-placeholder"><div class="plan-img-icon">ELITE</div></div>
+        <div class="plan-name">Elite</div>
+        <div class="plan-price"><span class="currency">$</span>85.000 <span class="period">ARS</span></div>
+        <div class="plan-duration">Sesión 25–40 Min — Configuración Quirúrgica Completa</div>
+        <p class="plan-tagline">Para los que exigen el techo absoluto. Cada capa del sistema intervenida: kernel, memoria, silicio. Benchmark antes/después incluido. Garantía de mejora o volvemos gratis.</p>
+        <ul class="plan-features">
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Windows a nivel Kernel</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Desfragmentación de IRQ & DPC Latency Fix</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> BIOS Completo + Hidden Settings Avanzadas</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Overclock CPU/GPU + Voltage Curve Tuning</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Undervolting térmico para max clock sostenido</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> RAM Timings Primarios, Secundarios & Terciarios</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> XMP/EXPO + ajuste manual de tRCD, tCL, tRP</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> GPU Shader Cache & Driver Tweak Profundo</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Mouse Polling Rate & Raw Input Buffer Config</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Monitor: Refresh Rate + Overdrive Calibración</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Red: TCP/IP Stack, DNS, QoS & Packet Scheduler</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Limpieza quirúrgica de drivers fantasma & bloatware</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Punto de Restauración Pre-Sesión documentado</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Reporte de Benchmarks Certificado Antes/Después</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Soporte Post-Sesión 30 Días con re-ajuste incluido</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> <strong style="color:var(--red)">Garantía de Mejora Documentada o Sesión Gratis</strong></li>
+        </ul>
+        <div style="background:rgba(0,170,255,0.07);border:1px solid rgba(0,170,255,0.2);padding:12px 14px;margin-bottom:20px;font-family:var(--font-mono);font-size:0.6rem;color:var(--red);letter-spacing:1.5px;line-height:1.8;">
+          ⚡ CUPOS LIMITADOS — DISPONIBILIDAD DIARIA RESTRINGIDA<br>
+          <span style="color:var(--gray2)">Para garantizar atención dedicada y resultados óptimos</span>
+        </div>
+        <a href="#" class="plan-btn primary" onclick="openReserve(event)">Reservar Elite Ahora</a>
+      </div>
+    </div>
+
+    <p class="plans-note sr" style="margin-top:32px;">¿No sabés qué plan elegir? <a href="#" onclick="openOptiGuide(event)">Usá nuestro OptiGuide →</a></p>
+  </div>
+</section>
+
+<!-- ══ GAMES ══ -->
+<section id="games">
+  <div class="container">
+    <div class="games-header sr">
+      <div class="section-label">JUEGOS SOPORTADOS</div>
+      <h2 class="section-title">Diseñado para <span class="hl">Todos</span> los Títulos Competitivos</h2>
+      <p class="section-sub">Tu juego, exactamente como querés que se sienta.</p>
+    </div>
+  </div>
+  <div class="games-scroller">
+    <div class="games-track" id="gamesTrack">
+      <div class="game-chip">CS2<span class="chip-fps">+60–140 FPS</span></div>
+      <div class="game-chip">VALORANT<span class="chip-fps">+70–160 FPS</span></div>
+      <div class="game-chip">FORTNITE<span class="chip-fps">+80–200 FPS</span></div>
+      <div class="game-chip">APEX LEGENDS<span class="chip-fps">+60–130 FPS</span></div>
+      <div class="game-chip">WARZONE<span class="chip-fps">+55–110 FPS</span></div>
+      <div class="game-chip">RAINBOW SIX<span class="chip-fps">+70–150 FPS</span></div>
+      <div class="game-chip">OVERWATCH 2<span class="chip-fps">+80–180 FPS</span></div>
+      <div class="game-chip">PUBG<span class="chip-fps">+50–100 FPS</span></div>
+      <div class="game-chip">TARKOV<span class="chip-fps">+40–90 FPS</span></div>
+      <div class="game-chip">RUST<span class="chip-fps">+55–120 FPS</span></div>
+      <div class="game-chip">MINECRAFT<span class="chip-fps">+100–350 FPS</span></div>
+      <div class="game-chip">LEAGUE<span class="chip-fps">+120–400 FPS</span></div>
+      <div class="game-chip">DOTA 2<span class="chip-fps">+90–250 FPS</span></div>
+      <div class="game-chip">ROBLOX<span class="chip-fps">+80–200 FPS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-left sr-l">
+        <div class="section-label">PREGUNTAS</div>
+        <h2 class="section-title">Preguntas<br><span class="hl">Frecuentes</span></h2>
+        <p class="section-sub" style="margin-top:16px; max-width:300px;">Todo lo que necesitás saber respondido en detalle.</p>
+        <div style="margin-top:40px; display:flex; flex-direction:column; gap:12px;">
+          <a href="https://wa.me/5491121919221?text=Hola!%20Quiero%20info%20sobre%20Pulse%20Hardware" target="_blank" class="btn-primary" style="display:inline-block; text-align:center; text-decoration:none;">Hablar por WhatsApp</a>
+          <a href="#plans" class="btn-secondary" style="display:inline-block; text-align:center; text-decoration:none;">Ver Planes →</a>
+        </div>
+      </div>
+      <div class="faq-list sr-r">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Qué hace realmente una optimización? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Desbloquea el rendimiento real de tu PC. Las configuraciones por defecto están diseñadas para oficinas, no para gaming. Tweaks genéricos y mal aplicados pueden causar problemas de gameplay y alta latencia aunque tu hardware sea capaz de mucho más, sin que lo sepas.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Es seguro para mi PC? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutamente. Cada cambio que hacemos es beneficioso para tu PC y los juegos que jugás, mientras AUMENTAMOS la vida útil de tus componentes. Usamos AnyDesk con encriptación TLS 1.2. Podés ver cada acción en tiempo real y cortar la sesión cuando quieras.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Se pueden perder archivos durante la sesión? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. Las optimizaciones son sobre configuración del sistema, drivers y BIOS. No formateamos, no borramos juegos ni archivos personales. En el plan Elite, antes de cualquier cambio crítico creamos un punto de restauración.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Qué mejora voy a notar? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Depende de tu setup actual. Nuestros clientes típicamente ven latencia notablemente más baja, frame pacing más ajustado, y mejoras de FPS entre el 50 y 72%, y en muchos casos superando esa marca. Usá la calculadora de FPS en esta página para una estimación personalizada.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Qué pasa si no noto mejora? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">El plan Elite incluye garantía de mejora. Si completada la sesión no medimos una mejora documentada en tus juegos principales, volvemos a trabajar sin costo adicional. En todos los planes, si hay algo que no quedó bien dentro del período de soporte, lo revisamos.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Cuánto dura la sesión? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Todas las sesiones duran entre 15 y 25 minutos. Trabajamos de forma eficiente y sin perder tiempo. Coordinamos en tu horario — tarde, noche o fin de semana. Sesiones el mismo día en la mayoría de los casos.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Cómo coordino el turno? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Completás el formulario de reserva → te contactamos por WhatsApp en menos de 2hs → coordinamos día y hora → el día del turno instalás AnyDesk y listo. Todo por chat, sin burocracia. Sin esperas de días.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Los cambios son permanentes? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sí. Todos los cambios persisten después de apagar la PC. No son tweaks temporales ni scripts que se revierten. Si reinstalás Windows necesitarías otra sesión, pero en condiciones normales la optimización es permanente.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Funciona en notebooks? <span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sí, con diferencias. En notebooks no aplicamos overclock por limitaciones térmicas, pero todas las optimizaciones de OS, drivers, red y configuración de juegos aplican igual. El resultado en laptops gaming también es muy bueno.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner sr">
+      <div class="section-label" style="justify-content:center;">RESULTADOS REALES, SIN PLACEBO</div>
+      <h2 class="cta-title">No Es Un<br><span class="hl">Problema</span><br>De Skill.</h2>
+      <p class="cta-sub">Recuperá tu ventaja competitiva. Tu PC puede dar mucho más. Desbloquealo hoy.</p>
+      <div class="cta-btns">
+        <a href="#" class="btn-primary" onclick="openReserve(event)">Reservar Sesión</a>
+        <a href="#reviews" class="btn-secondary">Ver Lo Que Dicen →</a>
+      </div>
+      <div class="cta-trust">
+        <div class="cta-trust-item">Optimización Verificada y Segura</div>
+        <div class="cta-trust-item">Hecha Manualmente por Ingenieros</div>
+        <div class="cta-trust-item">Rendimiento Máximo Garantizado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          PULSE HARDWARE
+        </div>
+        <p class="footer-brand-desc">Optimización gaming premium. Extraemos el máximo rendimiento de tu hardware actual. Resultados reales, medibles, el mismo día.</p>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:20px;">
+          <div class="nav-status-dot"></div>
+          <span style="font-family:var(--font-mono);font-size:0.62rem;color:#22c55e;letter-spacing:2px;">ONLINE — TOMANDO TURNOS</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Servicios</div>
+        <ul>
+          <li><a href="#plans">Plan Essential</a></li>
+          <li><a href="#plans">Plan Performance</a></li>
+          <li><a href="#plans">Plan Elite</a></li>
+          <li><a href="#" onclick="openReserve(event)">Reservar Turno</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Información</div>
+        <ul>
+          <li><a href="#steps">Cómo Funciona</a></li>
+          <li><a href="#results">Resultados</a></li>
+          <li><a href="#methods">Métodos</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contacto</div>
+        <ul>
+          <li><a href="https://wa.me/5491121919221" target="_blank">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/pulse_hardware?igsh=aTdsaDBzYWxsYmI%3D&utm_source=qr" target="_blank">Instagram</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025–2026 PULSE HARDWARE · OPTIMIZACIÓN GAMING · ARG</div>
+      <div class="footer-pay">
+        <div class="pay-icon">MERCADOPAGO</div>
+        <div class="pay-icon">PAYPAL</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ OPTI-GUIDE MODAL ══ -->
+<div class="modal-overlay" id="optiGuideModal" role="dialog" aria-modal="true" aria-label="OptiGuide — Encontrá tu plan ideal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">OptiGuide</span>
+      <button class="modal-close" onclick="closeOptiGuide()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-progress" id="ogProgress">
+        <div class="modal-prog-step done"></div>
+        <div class="modal-prog-step"></div>
+        <div class="modal-prog-step"></div>
+        <div class="modal-prog-step"></div>
+      </div>
+
+      <div class="modal-step active" id="ogStep1">
+        <p class="modal-q">¿Cuánto tiempo hace que no se optimiza tu PC?</p>
+        <div class="modal-opts">
+          <button class="modal-opt" onclick="ogNext(2, this)">Nunca o hace más de 2 años</button>
+          <button class="modal-opt" onclick="ogNext(2, this)">1–2 años atrás</button>
+          <button class="modal-opt" onclick="ogNext(2, this)">Hace menos de un año</button>
+          <button class="modal-opt" onclick="ogNext(2, this)">La tengo optimizada recientemente</button>
+        </div>
+      </div>
+
+      <div class="modal-step" id="ogStep2">
+        <p class="modal-q">¿Cuál es tu mayor problema actualmente?</p>
+        <div class="modal-opts">
+          <button class="modal-opt" onclick="ogNext(3, this)">FPS bajos o inestables</button>
+          <button class="modal-opt" onclick="ogNext(3, this)">Input lag y sensación de delay</button>
+          <button class="modal-opt" onclick="ogNext(3, this)">Stutters y micro-freezes</button>
+          <button class="modal-opt" onclick="ogNext(3, this)">Quiero el máximo absoluto</button>
+        </div>
+      </div>
+
+      <div class="modal-step" id="ogStep3">
+        <p class="modal-q">¿Cuál es tu nivel competitivo?</p>
+        <div class="modal-opts">
+          <button class="modal-opt" onclick="ogNext(4, this)">Jugador casual / entretenimiento</button>
+          <button class="modal-opt" onclick="ogNext(4, this)">Ranked / semi-competitivo</button>
+          <button class="modal-opt" onclick="ogNext(4, this)">Competitivo serio / torneos</button>
+          <button class="modal-opt" onclick="ogNext(4, this)">Pro player / streamer</button>
+        </div>
+      </div>
+
+      <div class="modal-step" id="ogStep4">
+        <p class="modal-q">¿Qué presupuesto tenés en mente?</p>
+        <div class="modal-opts">
+          <button class="modal-opt" onclick="ogResult('Essential')">Quiero el más económico</button>
+          <button class="modal-opt" onclick="ogResult('Performance')">Precio / calidad equilibrado</button>
+          <button class="modal-opt" onclick="ogResult('Elite')">Quiero lo mejor sin límites</button>
+          <button class="modal-opt" onclick="ogResult('Elite')">Quiero el máximo absoluto, garantizado</button>
+        </div>
+      </div>
+
+      <div class="modal-step" id="ogStepResult">
+        <div class="modal-result">
+          <p style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);letter-spacing:3px;margin-bottom:12px;">TU PLAN RECOMENDADO</p>
+          <div class="modal-result-plan" id="ogResultPlan">Performance</div>
+          <p class="modal-result-desc" id="ogResultDesc">Basado en tus respuestas, el Plan Performance es el ideal para vos. Incluye todo lo que necesitás para un salto competitivo real.</p>
+          <a href="#" class="btn-primary" style="display:inline-block; text-decoration:none; margin-bottom:12px;" onclick="closeOptiGuide(); openReserve(event)">Reservar Este Plan →</a>
+          <br>
+          <a href="#plans" class="btn-secondary" style="display:inline-block; text-decoration:none; font-size:0.8rem;" onclick="closeOptiGuide()">Ver Todos los Planes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESERVE MODAL ══ -->
+<div class="modal-overlay reserve-modal" id="reserveModal" role="dialog" aria-modal="true" aria-label="Reservar Turno">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Reservar Turno</span>
+      <button class="modal-close" onclick="closeReserve()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:24px;">
+        <div class="nav-status-dot"></div>
+        <span style="font-family:var(--font-mono);font-size:0.65rem;color:#22c55e;letter-spacing:2px;">INGENIEROS DISPONIBLES AHORA</span>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-lbl">// Nombre</label>
+          <input type="text" class="form-input" placeholder="Tu nombre" id="rName">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">// Plan</label>
+          <select class="form-select" id="rPlan">
+            <option value="">Elegí tu plan</option>
+            <option>Essential — $45.000 ARS</option>
+            <option>Performance — $65.000 ARS</option>
+            <option>Elite — $85.000 ARS</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">// Horario Preferido</label>
+          <select class="form-select" id="rHora">
+            <option value="">Cualquier horario</option>
+            <option>14:00 hs</option>
+            <option>15:00 hs</option>
+            <option>16:00 hs</option>
+            <option>17:00 hs</option>
+            <option>18:00 hs</option>
+            <option>19:00 hs</option>
+            <option>20:00 hs</option>
+            <option>21:00 hs</option>
+            <option>22:00 hs</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">// Medio de Pago</label>
+          <select class="form-select" id="rPago">
+            <option value="">Sin especificar</option>
+            <option>MercadoPago</option>
+            <option>PayPal</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-lbl">// Specs de tu PC (opcional)</label>
+          <textarea class="form-textarea" id="rSpecs" placeholder="CPU, GPU, RAM, juegos que usás..."></textarea>
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitReserve(this)">RESERVAR VÍA WHATSAPP →</button>
+      <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--gray2);margin-top:12px;text-align:center;letter-spacing:1px;">TE RESPONDEMOS EN MENOS DE 2HS · 100% REMOTO</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── COUNTERS ── */
+function animCount(el, target, dur=1800) {
+  let start=null;
+  (function step(ts){
+    if(!start) start=ts;
+    const p = Math.min((ts-start)/dur, 1);
+    const ease = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.floor(ease*target);
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent = target;
+  })(performance.now());
+}
+const cntObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      animCount(e.target, parseInt(e.target.dataset.target));
+      cntObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.counter').forEach(c=>cntObs.observe(c));
+
+/* ── SCROLL REVEAL ── */
+const srEls = document.querySelectorAll('.sr,.sr-l,.sr-r');
+const srObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:0.08});
+srEls.forEach(el=>srObs.observe(el));
+
+/* ── FAQ ── */
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q=>{
+    q.classList.remove('open');
+    q.setAttribute('aria-expanded','false');
+    q.nextElementSibling.classList.remove('open');
+  });
+  if(!isOpen){
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+    ans.classList.add('open');
+  }
+}
+
+/* ── DUPLICATE REVIEW TRACKS ── */
+['revRow1','revRow2','gamesTrack'].forEach(id=>{
+  const t = document.getElementById(id);
+  if(t) t.innerHTML += t.innerHTML;
+});
+
+/* ── FPS CALCULATOR ── */
+const gameBoosts = {
+  cs2:     { min:0.60, max:0.82 },
+  valorant:{ min:0.62, max:0.88 },
+  fortnite:{ min:0.55, max:0.92 },
+  apex:    { min:0.48, max:0.72 },
+  warzone: { min:0.42, max:0.68 },
+  r6:      { min:0.58, max:0.82 },
+  ow2:     { min:0.54, max:0.87 },
+  pubg:    { min:0.42, max:0.68 },
+};
+let currentGame = 'cs2';
+
+function selectGame(btn) {
+  document.querySelectorAll('.fps-game-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentGame = btn.dataset.game;
+  updateCalc();
+}
+
+function updateCalc() {
+  const current = parseInt(document.getElementById('fpsSlider').value);
+  const g = gameBoosts[currentGame] || {min:0.55, max:0.75};
+  // Deterministic: use midpoint of range for consistent results
+  const boost = (g.min + g.max) / 2;
+  const after = Math.round(current * (1 + boost));
+  const pct = Math.round(boost * 100);
+
+  document.getElementById('fpsCurrentVal').textContent = current;
+  document.getElementById('fpsAfter').textContent = after;
+  document.getElementById('fpsGainPct').textContent = pct;
+  document.getElementById('barBeforePct').textContent = current+'fps';
+  document.getElementById('barAfterPct').textContent = after+'fps';
+
+  const max = Math.max(current, after) * 1.15;
+  document.getElementById('barBefore').style.width = (current/max*100)+'%';
+  document.getElementById('barAfter').style.width = (after/max*100)+'%';
+}
+document.getElementById('fpsSlider').addEventListener('input', updateCalc);
+updateCalc();
+
+/* ── OPTI-GUIDE ── */
+let ogCurrentStep = 1;
+function openOptiGuide(e) {
+  e.preventDefault();
+  ogCurrentStep = 1;
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('ogStep1').classList.add('active');
+  updateOgProgress(1);
+  document.getElementById('optiGuideModal').classList.add('open');
+}
+function closeOptiGuide() {
+  document.getElementById('optiGuideModal').classList.remove('open');
+}
+function ogNext(next, btn) {
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('ogStep'+next).classList.add('active');
+  ogCurrentStep = next;
+  updateOgProgress(next);
+}
+function ogResult(plan) {
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('ogStepResult').classList.add('active');
+  document.getElementById('ogResultPlan').textContent = plan;
+  const descs = {
+    'Essential': 'Para un boost rápido y limpio. Ideal si buscás mejora inmediata de FPS y respuesta.',
+    'Performance': 'El equilibrio perfecto. BIOS, overclock y todo lo que necesitás para jugar competitivo.',
+    'Elite': 'El paquete completo. Para quienes exigen el máximo absoluto, con garantía de mejora y resultados verificados en tiempo real.'
+  };
+  document.getElementById('ogResultDesc').textContent = descs[plan] || '';
+  updateOgProgress(5);
+}
+function updateOgProgress(step) {
+  const steps = document.querySelectorAll('.modal-prog-step');
+  steps.forEach((s,i)=> s.classList.toggle('done', i < step));
+}
+document.getElementById('optiGuideModal').addEventListener('click', e=>{
+  if(e.target === document.getElementById('optiGuideModal')) closeOptiGuide();
+});
+
+/* ── RESERVE MODAL ── */
+function openReserve(e) {
+  e.preventDefault();
+  document.getElementById('reserveModal').classList.add('open');
+}
+function closeReserve() {
+  document.getElementById('reserveModal').classList.remove('open');
+}
+function submitReserve(btn) {
+  const nameEl = document.getElementById('rName');
+  const planEl = document.getElementById('rPlan');
+  const name = nameEl.value.trim();
+  const plan = planEl.value;
+
+  // Reset error states
+  nameEl.style.borderColor = ''; planEl.style.borderColor = '';
+
+  let hasError = false;
+  if(!name || name.length < 2) {
+    nameEl.style.borderColor = '#e74c3c';
+    nameEl.focus();
+    hasError = true;
+  }
+  if(!plan) {
+    planEl.style.borderColor = '#e74c3c';
+    if(!hasError) planEl.focus();
+    hasError = true;
+  }
+
+  if(hasError) {
+    btn.textContent = '⚠ COMPLETÁ NOMBRE Y PLAN';
+    btn.style.background = '#c0392b';
+    setTimeout(()=>{ btn.textContent='RESERVAR VÍA WHATSAPP →'; btn.style.background=''; }, 2500);
+    return;
+  }
+
+  const hora = document.getElementById('rHora').value || 'No especificado';
+  const pago = document.getElementById('rPago').value || 'No especificado';
+  const specs = document.getElementById('rSpecs').value.trim() || 'Sin detalle';
+  const msg = encodeURIComponent(
+    `¡Hola! Quiero reservar un turno en Pulse Hardware.\n\n`+
+    `*Nombre:* ${name}\n`+
+    `*Plan:* ${plan}\n`+
+    `*Horario:* ${hora}\n`+
+    `*Medio de pago:* ${pago}\n`+
+    `*Specs / Detalle:* ${specs}`
+  );
+  window.open(`https://wa.me/5491121919221?text=${msg}`, '_blank');
+  btn.textContent = '✓ REDIRIGIENDO A WHATSAPP...';
+  btn.style.background = '#27ae60';
+  setTimeout(()=>{ btn.textContent='RESERVAR VÍA WHATSAPP →'; btn.style.background=''; closeReserve(); }, 3000);
+}
+document.getElementById('reserveModal').addEventListener('click', e=>{
+  if(e.target === document.getElementById('reserveModal')) closeReserve();
+});
+
+/* ── MOBILE MENU ── */
+function toggleMobileMenu() {
+  const links = document.querySelector('.nav-links');
+  const isOpen = links.classList.contains('mobile-open');
+  if (isOpen) {
+    links.classList.remove('mobile-open');
+    links.style.cssText = '';
+  } else {
+    links.classList.add('mobile-open');
+    links.style.display = 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'fixed';
+    links.style.top = '60px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(10,10,10,0.98)';
+    links.style.padding = '20px';
+    links.style.borderBottom = '1px solid #2a2a2a';
+    links.style.zIndex = '9998';
+  }
+}
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', ()=>{
+  document.querySelector('nav').style.background =
+    window.scrollY > 60 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.95)';
+}, {passive:true});
+</script>
+</body>
+</html>
