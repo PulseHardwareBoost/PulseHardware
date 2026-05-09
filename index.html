@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PULSE HARDWARE — Optimización Gaming Premium</title>
+<meta name="description" content="Optimización gaming profesional 100% remota. +72% FPS promedio. BIOS, overclock, RAM timings, Windows y red. Sesiones el mismo día. Resultados verificados antes y después.">
+<meta property="og:title" content="PULSE HARDWARE — Optimización Gaming Premium">
+<meta property="og:description" content="Optimización gaming profesional 100% remota. +72% FPS promedio. Sesiones el mismo día, resultados garantizados.">
+<meta property="og:type" content="website">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -50,18 +58,15 @@ nav {
   transition:background .3s;
 }
 .nav-logo {
-  display:flex; align-items:center; gap:10px;
-  font-family:var(--font-display); font-size:1.3rem; font-weight:800;
-  letter-spacing:3px; color:var(--white); text-decoration:none;
+  display:flex; align-items:center; gap:12px;
+  font-family:var(--font-body); font-size:0.78rem; font-weight:300;
+  letter-spacing:6px; color:var(--white); text-decoration:none;
   text-transform:uppercase;
 }
 .nav-logo-icon {
-  width:32px; height:32px;
+  width:20px; height:20px;
   background:var(--red);
   clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display:flex; align-items:center; justify-content:center;
-  font-size:0.75rem; font-weight:900; color:#fff;
-  font-family:var(--font-display);
   flex-shrink:0;
 }
 .nav-links {
@@ -133,8 +138,9 @@ nav {
   color:var(--red); letter-spacing:4px; text-transform:uppercase;
   margin-bottom:24px;
   display:flex; align-items:center; gap:12px; justify-content:center;
-  opacity:0; animation:fadeup .8s ease .3s forwards;
+  opacity:0; transition:opacity .8s ease .3s, transform .8s ease .3s; transform:translateY(30px);
 }
+.hero-visible .hero-eyebrow { opacity:1; transform:translateY(0); }
 .hero-eyebrow::before, .hero-eyebrow::after {
   content:''; width:40px; height:1px; background:var(--red);
 }
@@ -148,8 +154,9 @@ nav {
   color:var(--white);
   text-transform:uppercase;
   margin-bottom:8px;
-  opacity:0; animation:fadeup .8s ease .45s forwards;
+  opacity:0; transition:opacity .8s ease .45s, transform .8s ease .45s; transform:translateY(30px);
 }
+.hero-visible .hero-h1 { opacity:1; transform:translateY(0); }
 .hero-h1 .accent { color:var(--red); }
 .hero-h1 .outline {
   color:transparent;
@@ -159,14 +166,16 @@ nav {
 .hero-sub {
   font-size:1.05rem; font-weight:300; color:var(--gray);
   line-height:1.8; max-width:600px; margin:28px auto 48px;
-  opacity:0; animation:fadeup .8s ease .6s forwards;
+  opacity:0; transition:opacity .8s ease .6s, transform .8s ease .6s; transform:translateY(30px);
 }
+.hero-visible .hero-sub { opacity:1; transform:translateY(0); }
 .hero-sub strong { color:var(--white); font-weight:600; }
 
 .hero-btns {
   display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
-  opacity:0; animation:fadeup .8s ease .75s forwards;
+  opacity:0; transition:opacity .8s ease .75s, transform .8s ease .75s; transform:translateY(30px);
 }
+.hero-visible .hero-btns { opacity:1; transform:translateY(0); }
 .btn-primary {
   background:var(--red); color:#fff;
   padding:14px 36px; font-family:var(--font-body); font-size:0.88rem;
@@ -189,8 +198,9 @@ nav {
   display:grid; grid-template-columns:repeat(4,1fr);
   width:100%; max-width:1100px; margin:80px auto 0;
   border:1px solid var(--border);
-  opacity:0; animation:fadeup .8s ease .9s forwards;
+  opacity:0; transition:opacity .8s ease .9s, transform .8s ease .9s; transform:translateY(30px);
 }
+.hero-visible .hero-strip { opacity:1; transform:translateY(0); }
 .hero-strip-item {
   padding:28px 32px;
   border-right:1px solid var(--border);
@@ -861,9 +871,19 @@ footer {
 }
 .form-submit:hover { background:#00ccff; box-shadow:0 4px 20px rgba(0,170,255,0.3); }
 
-/* ══════════════════════════
-   MOBILE
-══════════════════════════ */
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position:fixed; bottom:28px; right:28px; z-index:9990;
+  width:54px; height:54px; border-radius:50%;
+  background:#25d366; box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  display:flex; align-items:center; justify-content:center;
+  text-decoration:none; transition:transform .2s, box-shadow .2s;
+  animation:wa-pulse 3s ease infinite;
+}
+.wa-float:hover { transform:scale(1.1); box-shadow:0 6px 28px rgba(37,211,102,0.55); animation:none; }
+.wa-float svg { width:28px; height:28px; fill:#fff; }
+@keyframes wa-pulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)} 50%{box-shadow:0 4px 28px rgba(37,211,102,0.65)} }
+
 .hamburger { display:none; background:none; border:1px solid var(--border); padding:8px 10px; cursor:pointer; color:var(--white); font-size:1.1rem; }
 
 @media(max-width:1024px) {
@@ -873,17 +893,56 @@ footer {
   .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
 }
 @media(max-width:768px) {
+  /* Nav */
+  nav { padding:0 16px; }
+
+  /* Hero */
+  .hero { padding:90px 20px 48px; }
+  .hero-h1 { font-size:clamp(3rem, 17vw, 6rem); letter-spacing:-1px; }
+  .hero-sub { font-size:0.95rem; margin:20px auto 36px; }
+
+  /* Hero strip */
   .hero-strip { grid-template-columns:repeat(2,1fr); }
+  .strip-val { font-size:2rem; }
+
+  /* Steps */
   .steps-grid { grid-template-columns:1fr; }
+
+  /* Plans */
   .plans-grid { grid-template-columns:1fr; }
+
+  /* Methods — add visual separator when stacked */
+  .method-row { grid-template-columns:1fr; border-bottom:1px solid var(--border); }
+  .method-gain-cell {
+    border:none;
+    border-top:1px solid var(--border);
+    text-align:left;
+    align-items:flex-start;
+    padding:16px 32px;
+  }
+  .method-name-cell { border:none; padding-bottom:8px; }
+  .method-desc-cell { padding:0 32px 16px; }
+
+  /* FAQ */
   .faq-inner { grid-template-columns:1fr; }
-  .method-row { grid-template-columns:1fr; }
-  .method-gain-cell, .method-name-cell { border:none; }
+
+  /* Nav links */
   .nav-links { display:none; }
   .hamburger { display:flex; align-items:center; }
+
+  /* Footer */
   .footer-top { grid-template-columns:1fr; }
-  .hero-h1 { font-size:clamp(3rem, 18vw, 6rem); }
+
+  /* Form */
   .form-grid { grid-template-columns:1fr; }
+
+  /* OptiGuide block */
+  .opti-block { flex-direction:column; align-items:flex-start; }
+  .opti-block a { width:100%; text-align:center; }
+
+  /* WhatsApp float — smaller on mobile */
+  .wa-float { width:46px; height:46px; bottom:20px; right:16px; }
+  .wa-float svg { width:22px; height:22px; }
 }
 </style>
 </head>
@@ -905,8 +964,6 @@ footer {
     </li>
   </ul>
   <div class="nav-right">
-    <div class="nav-status-dot"></div>
-    <span class="nav-engineers">INGENIEROS DISPONIBLES</span>
     <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
   </div>
 </nav>
@@ -936,7 +993,7 @@ footer {
   </p>
 
   <div class="hero-btns">
-    <a href="#results" class="btn-primary">Ver Resultados</a>
+    <a href="#" class="btn-primary" onclick="openReserve(event)">Reservar Ahora</a>
     <a href="#plans" class="btn-secondary">Ver Planes →</a>
   </div>
 
@@ -962,7 +1019,7 @@ footer {
 
 <!-- TRUSTED BY -->
 <div class="trusted-by" aria-hidden="true">
-  <div class="trusted-label">Confiado por los mejores</div>
+  <div class="trusted-label">Optimizado para jugadores de</div>
   <div class="trusted-scroll">
     <div class="trusted-track">
       <span class="trusted-item">CS2</span>
@@ -1418,6 +1475,8 @@ footer {
         <div class="plan-img-placeholder"><div class="plan-img-icon">ESS</div></div>
         <div class="plan-name">Essential</div>
         <div class="plan-price"><span class="currency">$</span>45.000 <span class="period">ARS</span></div>
+        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gray);letter-spacing:1px;margin-bottom:4px;">≈ USD 45</div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gray2);letter-spacing:1px;margin-bottom:8px;">Precio sujeto a actualización · Consultá disponibilidad</div>
         <div class="plan-duration">Sesión 15–25 Min — Windows, Juego & Red</div>
         <p class="plan-tagline">Para un sistema más rápido y limpio con rendimiento de red y juego mejorado. Ideal para un boost de respuesta inmediato.</p>
         <ul class="plan-features">
@@ -1436,6 +1495,8 @@ footer {
         <div class="plan-img-placeholder"><div class="plan-img-icon">PRO</div></div>
         <div class="plan-name">Performance</div>
         <div class="plan-price"><span class="currency">$</span>65.000 <span class="period">ARS</span></div>
+        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gray);letter-spacing:1px;margin-bottom:4px;">≈ USD 65</div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gray2);letter-spacing:1px;margin-bottom:8px;">Precio sujeto a actualización · Consultá disponibilidad</div>
         <div class="plan-duration">Sesión 20–30 Min — Essential + BIOS, Overclock & Latencia</div>
         <p class="plan-tagline">Para jugadores competitivos que quieren llevar su rendimiento al siguiente nivel. BIOS completo, configuraciones ocultas y optimización de input incluidos.</p>
         <ul class="plan-features">
@@ -1459,6 +1520,8 @@ footer {
         <div class="plan-img-placeholder"><div class="plan-img-icon">ELITE</div></div>
         <div class="plan-name">Elite</div>
         <div class="plan-price"><span class="currency">$</span>85.000 <span class="period">ARS</span></div>
+        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gray);letter-spacing:1px;margin-bottom:4px;">≈ USD 85</div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gray2);letter-spacing:1px;margin-bottom:8px;">Precio sujeto a actualización · Consultá disponibilidad</div>
         <div class="plan-duration">Sesión 25–40 Min — Configuración Quirúrgica Completa</div>
         <p class="plan-tagline">Para los que exigen el techo absoluto. Cada capa del sistema intervenida: kernel, memoria, silicio. Benchmark antes/después incluido. Garantía de mejora o volvemos gratis.</p>
         <ul class="plan-features">
@@ -1487,7 +1550,14 @@ footer {
       </div>
     </div>
 
-    <p class="plans-note sr" style="margin-top:32px;">¿No sabés qué plan elegir? <a href="#" onclick="openOptiGuide(event)">Usá nuestro OptiGuide →</a></p>
+    <div class="sr opti-block" style="margin-top:48px; background:var(--bg2); border:1px solid var(--border2); padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">¿No sabés qué plan elegir?</div>
+        <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;text-transform:uppercase;color:var(--white);">Usá el OptiGuide</div>
+        <div style="font-size:0.82rem;color:var(--gray);margin-top:4px;font-weight:300;">4 preguntas · 30 segundos · te decimos exactamente qué necesitás</div>
+      </div>
+      <a href="#" onclick="openOptiGuide(event)" class="btn-primary" style="text-decoration:none;white-space:nowrap;flex-shrink:0;">Encontrá Mi Plan →</a>
+    </div>
   </div>
 </section>
 
@@ -1596,6 +1666,11 @@ footer {
 </section>
 
 <!-- ══ FOOTER ══ -->
+<!-- ══ WHATSAPP FLOAT ══ -->
+<a href="https://wa.me/5491121919221?text=Hola!%20Quiero%20info%20sobre%20Pulse%20Hardware" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -1725,7 +1800,7 @@ footer {
     <div class="modal-body">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:24px;">
         <div class="nav-status-dot"></div>
-        <span style="font-family:var(--font-mono);font-size:0.65rem;color:#22c55e;letter-spacing:2px;">INGENIEROS DISPONIBLES AHORA</span>
+        <span style="font-family:var(--font-mono);font-size:0.65rem;color:#22c55e;letter-spacing:2px;">DISPONIBLE AHORA — TE RESPONDEMOS EN &lt;2HS</span>
       </div>
       <div class="form-grid">
         <div class="form-group">
@@ -1765,8 +1840,8 @@ footer {
           </select>
         </div>
         <div class="form-group full">
-          <label class="form-lbl">// Specs de tu PC (opcional)</label>
-          <textarea class="form-textarea" id="rSpecs" placeholder="CPU, GPU, RAM, juegos que usás..."></textarea>
+          <label class="form-lbl">// Contanos tu PC — CPU, GPU, RAM, juegos que jugás</label>
+          <textarea class="form-textarea" id="rSpecs" placeholder="Ej: Intel i5-12400F · RTX 3060 · 16GB RAM · CS2 80fps · quiero llegar a 200+"></textarea>
         </div>
       </div>
       <button class="form-submit" onclick="submitReserve(this)">RESERVAR VÍA WHATSAPP →</button>
@@ -1802,7 +1877,7 @@ document.querySelectorAll('.counter').forEach(c=>cntObs.observe(c));
 const srEls = document.querySelectorAll('.sr,.sr-l,.sr-r');
 const srObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
-},{threshold:0.08});
+},{threshold:0.18});
 srEls.forEach(el=>srObs.observe(el));
 
 /* ── FAQ ── */
@@ -1990,6 +2065,17 @@ window.addEventListener('scroll', ()=>{
   document.querySelector('nav').style.background =
     window.scrollY > 60 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.95)';
 }, {passive:true});
+/* ── HERO VISIBILITY ── */
+(function(){
+  const hero = document.getElementById('hero');
+  if(!hero) return;
+  const heroObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) { hero.classList.add('hero-visible'); heroObs.disconnect(); }
+    });
+  },{threshold:0.1});
+  heroObs.observe(hero);
+})();
 </script>
 </body>
 </html>
