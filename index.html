@@ -61,7 +61,10 @@ nav {
   display:flex; align-items:center; gap:12px;
   font-family:var(--font-body); font-size:0.78rem; font-weight:300;
   letter-spacing:6px; color:var(--white); text-decoration:none;
-  text-transform:uppercase;
+  text-transform:uppercase; min-width:0;
+}
+@media(max-width:480px) {
+  .nav-logo { font-size:0.65rem; letter-spacing:3px; gap:8px; }
 }
 .nav-logo-icon {
   width:20px; height:20px;
@@ -1596,23 +1599,21 @@ footer {
         <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gray);letter-spacing:1px;margin-bottom:4px;">≈ USD 85</div>
         <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gray2);letter-spacing:1px;margin-bottom:8px;">Precio sujeto a actualización · Consultá disponibilidad</div>
         <div class="plan-duration">Sesión 25–40 Min — Configuración Quirúrgica Completa</div>
-        <p class="plan-tagline">Para los que exigen el techo absoluto. Cada capa del sistema intervenida: kernel, memoria, silicio. Benchmark antes/después incluido.</p>
+        <p class="plan-tagline">Para los que exigen el techo absoluto. Windows, BIOS, RAM y overclock configurados al máximo para tu hardware. Benchmark antes/después incluido.</p>
         <ul class="plan-features">
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Windows a nivel Kernel</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Desfragmentación de IRQ & DPC Latency Fix</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> BIOS Completo + Hidden Settings Avanzadas</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Optimización Windows completa (servicios, registro, privacidad)</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Prioridades de interrupción & reducción de DPC latency</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> BIOS: C-states, power limits y opciones avanzadas</li>
           <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Overclock CPU/GPU + Voltage Curve Tuning</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Undervolting térmico para max clock sostenido</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Undervolting para temperatura estable y clock sostenido</li>
           <li class="plan-feat included"><span class="plan-feat-icon">✓</span> RAM Timings Primarios, Secundarios & Terciarios</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> XMP/EXPO + ajuste manual de tRCD, tCL, tRP</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> GPU Shader Cache & Driver Tweak Profundo</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> XMP/EXPO + ajuste de tRCD, tCL, tRP</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> GPU: shader cache, driver settings y optimizaciones</li>
           <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Mouse Polling Rate & Raw Input Buffer Config</li>
           <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Monitor: Refresh Rate + Overdrive Calibración</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Red: TCP/IP Stack, DNS, QoS & Packet Scheduler</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Limpieza quirúrgica de drivers fantasma & bloatware</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Punto de Restauración Pre-Sesión documentado</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Reporte de Benchmarks Certificado Antes/Después</li>
-          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Soporte Post-Sesión 30 Días con re-ajuste incluido</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Red: TCP stack, DNS, QoS & Packet Scheduler</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Limpieza de drivers obsoletos y bloatware</li>
+          <li class="plan-feat included"><span class="plan-feat-icon">✓</span> Punto de restauración documentado antes de la sesión</li>
 
         </ul>
         <div style="background:rgba(0,170,255,0.07);border:1px solid rgba(0,170,255,0.2);padding:12px 14px;margin-bottom:20px;font-family:var(--font-mono);font-size:0.6rem;color:var(--red);letter-spacing:1.5px;line-height:1.8;">
@@ -1721,10 +1722,7 @@ footer {
 <!-- ══ URGENCY BAR ══ -->
 <div class="urgency-bar">
   <div class="urgency-bar-inner">
-    <span>⚡ CUPOS HOY</span>
-    <span id="cuposCount">3</span> turnos disponibles para hoy
-    <span>·</span>
-    <span id="sessionCount">1.247</span> sesiones este mes
+    <span>⚡ 4 CUPOS POR DÍA</span>
     <span>·</span>
     Respondemos en <span>&lt;2hs</span>
   </div>
@@ -2209,7 +2207,7 @@ setTimeout(()=>{ showNextToast(); setInterval(showNextToast, 18000); }, 5000);
 
 /* ── CUPOS COUNTDOWN ── */
 (function(){
-  let c = 3;
+  let c = 4;
   const el = document.getElementById('cuposCount');
   if(!el) return;
   setInterval(()=>{
