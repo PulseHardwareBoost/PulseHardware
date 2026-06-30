@@ -780,6 +780,8 @@ footer {
   padding:6px 12px; font-family:var(--font-mono); font-size:0.62rem;
   color:var(--gray); letter-spacing:1px; text-transform:uppercase;
 }
+a.pay-icon { transition:border-color .2s, color .2s; cursor:pointer; }
+a.pay-icon:hover { border-color:var(--red); color:var(--white); }
 
 /* ══════════════════════════
    SCROLL REVEAL
@@ -1805,6 +1807,7 @@ footer {
       <div class="footer-copy">© 2025–2026 PULSE HARDWARE · OPTIMIZACIÓN GAMING · ARG</div>
       <div class="footer-pay">
         <div class="pay-icon">MERCADOPAGO</div>
+        <a class="pay-icon" href="https://www.remitly.com" target="_blank" rel="noopener" style="text-decoration:none;">REMITLY (INTERNACIONAL)</a>
         <div class="pay-icon">USDT TRC20</div>
         <div class="pay-icon">CRIPTO</div>
       </div>
@@ -1927,9 +1930,13 @@ footer {
           <select class="form-select" id="rPago">
             <option value="">Sin especificar</option>
             <option>MercadoPago</option>
+            <option>Transferencia Internacional (Remitly)</option>
             <option>USDT (TRC20)</option>
             <option>Cripto (Bitcoin, ETH, otras)</option>
           </select>
+          <div style="margin-top:8px; font-family:var(--font-mono); font-size:0.72rem; color:var(--gray); letter-spacing:0.3px;">
+            ¿Pagás desde otro país? Podés usar <a href="https://www.remitly.com" target="_blank" rel="noopener" style="color:var(--red); text-decoration:underline;">Remitly</a>, USDT o cripto para enviar dinero desde cualquier parte del mundo.
+          </div>
         </div>
         <div class="form-group full">
           <label class="form-lbl">// Contanos tu PC — CPU, GPU, RAM, juegos que jugás</label>
